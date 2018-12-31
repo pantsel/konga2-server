@@ -41,7 +41,6 @@ the account verification message.)`,
       example: 'Frida Kahlo de Rivera',
       description: 'The user\'s full name.',
     }
-
   },
 
 
@@ -115,6 +114,8 @@ the account verification message.)`,
     } else {
       sails.log.info('Skipping new account email verification... (since `verifyEmailAddresses` is disabled)');
     }
+
+    return newUserRecord;
 
   }
 
