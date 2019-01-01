@@ -19,7 +19,7 @@ module.exports = {
 
   fn: async function (inputs) {
 
-    return this.req.me;
+    return this.req.me || {};
 
   }
 

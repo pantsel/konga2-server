@@ -19,7 +19,7 @@ module.exports.policies = {
 
   // '*': true,
 
-  'auth/me' : 'is-logged-in',
+  // 'auth/me' : 'is-logged-in',
 
   UserController: {
     'find': ['is-logged-in','paginate'],

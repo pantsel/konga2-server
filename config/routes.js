@@ -34,17 +34,13 @@ module.exports.routes = {
   ***************************************************************************/
 
   /**
-   * AUTH ROUTES
+   * Auth & Security routes
    */
   'POST /api/v1/auth/login'  : { action: 'auth/login' },
   '/api/v1/auth/logout'      : { action: 'auth/logout' },
   'POST /api/v1/auth/signup' : { action: 'auth/signup' },
   '/api/v1/auth/me'     : { action: 'auth/me' },
-
-  /**
-   * Security
-   */
-  "GET /security/csrfToken": { action: "security/grant-csrf-token" }
+  "GET /api/v1/security/csrfToken": { action: "security/grant-csrf-token" }
 
 
 

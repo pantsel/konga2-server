@@ -42,6 +42,10 @@ actually logged in.  (If they weren't, then this action is just a no-op.)`,
     // > to the underlying session store.
     if (!this.req.wantsJSON) {
       throw {redirect: '/login'};
+    }else{
+      return {
+        success: true
+      }
     }
 
   }
