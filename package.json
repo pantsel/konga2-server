@@ -19,7 +19,8 @@
     "sails-pagination-middleware": "0.0.2"
   },
   "devDependencies": {
-    "@sailshq/eslint": "^4.19.3"
+    "@sailshq/eslint": "^4.19.3",
+    "faker": "^4.1.0"
   },
   "scripts": {
     "start": "node app.js",
