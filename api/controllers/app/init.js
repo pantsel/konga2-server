@@ -20,7 +20,8 @@ module.exports = {
   fn: async function (inputs) {
 
     let superAdminRecord = await User.find({
-      isSuperAdmin: true
+      isSuperAdmin: true,
+      active: true
     });
 
     return {

@@ -64,19 +64,25 @@ and exposed as \`req.me\`.)`
       // To customize the response for _only this_ action, replace `responseType` with
       // something else.  For example, you might set `statusCode: 498` and change the
       // implementation below accordingly (see http://sailsjs.com/docs/concepts/controllers).
+    },
+
+    notActive: {
+      description: `The provided user is not active.`,
+      responseType: 'notActive'
     }
 
   },
 
 
   fn: async function (inputs) {
-
     // Look up by the email address.
     // (note that we lowercase it to ensure the lookup is always case-insensitive,
     // regardless of which database we're using)
     var userRecord = await User.findOne({
-      emailAddress: inputs.emailAddress.toLowerCase(),
+      emailAddress: inputs.emailAddress.toLowerCase()
     });
+
+    sails.log('[Login]: userRecord =>', userRecord)
 
     // If there was no matching user, respond thru the "badCombo" exit.
     if(!userRecord) {
@@ -86,6 +92,11 @@ and exposed as \`req.me\`.)`
     // If the password doesn't match, then also exit thru "badCombo".
     await sails.helpers.passwords.checkPassword(inputs.password, userRecord.password)
       .intercept('incorrect', 'badCombo');
+
+    // If the user is not active, throw an error
+    if(!userRecord.active) {
+      throw 'notActive'
+    }
 
     // If "Remember Me" was enabled, then keep the session alive for
     // a longer amount of time.  (This causes an updated "Set Cookie"
