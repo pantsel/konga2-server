@@ -23,6 +23,7 @@ module.exports.policies = {
 
   UserController: {
     'find': ['is-logged-in','paginate'],
+    'destroy': ['is-super-admin','not-me']
   }
 
 };
