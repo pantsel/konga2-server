@@ -35,7 +35,7 @@ module.exports = {
     for(let i=0; i<100; i++) {
       users.push({
         fullName: faker.name.findName(),
-        emailAddress: faker.internet.email(),
+        emailAddress: faker.internet.email().toLocaleLowerCase(),
         password: await sails.helpers.passwords.hashPassword('admin1!')
       })
     }

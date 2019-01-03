@@ -23,8 +23,11 @@ module.exports.policies = {
 
   UserController: {
     'find': ['is-logged-in','paginate'],
+    'findOne': ['is-logged-in'],
     'destroy': ['is-super-admin','not-me'],
     'update': ['is-logged-in']
-  }
+  },
+
+  'user/change-password' : ['is-logged-in']
 
 };

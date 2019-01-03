@@ -44,5 +44,8 @@ module.exports.routes = {
   '/api/v1/app/init'     : { action: 'app/init' },
 
 
+  'POST /api/v1/users/:id/changePassword'     : { action: 'user/change-password' },
+
+
 
 };
