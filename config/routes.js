@@ -47,5 +47,8 @@ module.exports.routes = {
   'POST /api/v1/users/:id/changePassword'     : { action: 'user/change-password' },
 
 
+  '/api/v1/permissions'     : { action: 'permissions/list' },
+
+
 
 };

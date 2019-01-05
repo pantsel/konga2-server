@@ -28,6 +28,8 @@ module.exports.policies = {
     'update': ['is-logged-in']
   },
 
-  'user/change-password' : ['is-logged-in']
+  'user/change-password' : ['is-logged-in'],
+
+  'permissions/list' : ['is-logged-in'],
 
 };

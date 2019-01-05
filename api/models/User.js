@@ -4,6 +4,13 @@
  * A user who can log in to this application.
  */
 
+const allPermissions = require('../fixtures/permissions');
+
+const defaultPermissions = {};
+Object.keys(allPermissions).forEach(key => {
+  defaultPermissions[key] = []
+});
+
 module.exports = {
 
   attributes: {
@@ -115,6 +122,12 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
       defaultsTo: true
     },
 
+    permissions: {
+      type: 'json',
+      description: 'The user\s permissions',
+      defaultsTo: defaultPermissions
+    },
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -130,6 +143,9 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
 
   customToJSON: function() {
     // Return a shallow copy of this record with the password and ssn removed.
+    if(!this.permissions) {
+      this.permissions = defaultPermissions;
+    }
     return _.omit(this, ['password'])
   }
 
