@@ -13,6 +13,8 @@ Object.keys(allPermissions).forEach(key => {
 
 module.exports = {
 
+  schema: true,
+
   attributes: {
 
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
