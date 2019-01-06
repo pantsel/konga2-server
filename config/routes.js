@@ -51,4 +51,19 @@ module.exports.routes = {
 
 
 
+  /**
+   * Kong routes
+   */
+
+  'GET /kong': 'KongProxyController.proxy',
+  'GET /kong/:entity': 'KongProxyController.listProxy',
+  'GET /kong/:entity/:id': 'KongProxyController.proxy',
+  'GET /kong/:entity/:id/:child_entity': 'KongProxyController.listProxy',
+  'POST /kong/*': 'KongProxyController.proxy',
+  'PUT /kong/*': 'KongProxyController.proxy',
+  'PATCH /kong/*': 'KongProxyController.proxy',
+  'DELETE /kong/*': 'KongProxyController.proxy'
+
+
+
 };

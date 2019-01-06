@@ -80,7 +80,7 @@ and exposed as \`req.me\`.)`
     // regardless of which database we're using)
     var userRecord = await User.findOne({
       emailAddress: inputs.emailAddress.toLowerCase()
-    });
+    }).populate('connection');
 
     sails.log('[Login]: userRecord =>', userRecord)
 

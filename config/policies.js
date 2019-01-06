@@ -28,8 +28,19 @@ module.exports.policies = {
     'update': ['is-logged-in']
   },
 
+  ConnectionController: {
+    'find': ['is-logged-in','paginate'],
+    'findOne': ['is-logged-in'],
+    'destroy': ['is-super-admin'],
+    'update': ['is-logged-in']
+  },
+
   'user/change-password' : ['is-logged-in'],
 
   'permissions/list' : ['is-logged-in'],
+
+  KongProxyController: {
+    "*": ['is-logged-in', 'kong']
+  }
 
 };

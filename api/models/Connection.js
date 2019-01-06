@@ -14,6 +14,7 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     name: {
       type: 'string',
+      unique: true,
       required: true
     },
 
@@ -55,8 +56,7 @@ module.exports = {
     },
 
     kongVersion: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     healthChecks: {
@@ -84,6 +84,12 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
   },
+
+  afterCreate: (value, next) => {
+    // Get Kong version
+    return next();
+
+  }
 
 };
 

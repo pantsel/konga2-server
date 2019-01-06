@@ -130,6 +130,10 @@ So, while this \`isSuperAdmin\` demarcation might not be the right approach fore
       defaultsTo: defaultPermissions
     },
 
+    connection: {
+      model:'connection'
+    }
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
