@@ -80,7 +80,7 @@ const self = module.exports = {
    * @param req
    * @param res
    */
-  listProxy: (req, res) => {
+  listProxy: async (req, res) => {
     req.url = req.url.replace('/kong', ''); // Remove the /kong prefix
     const entity = req.params.entity;
 
@@ -88,10 +88,12 @@ const self = module.exports = {
     sails.log.debug("KongProxyController:listAllEntityRecords:req.url", req.url)
     sails.log.debug("KongProxyController:listAllEntityRecords:entity", entity)
 
-    Kong.listAllCb(req, req.url, (err, data) => {
-      if(err) return res.negotiate(err);
-      return res.json(data);
-    })
+    try {
+      const resp = await Kong.listAll(req.connection, req.url);
+      return res.json(resp);
+    }catch (err) {
+      return res.negotiate(err);
+    }
   },
 
 

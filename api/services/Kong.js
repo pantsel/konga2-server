@@ -26,6 +26,28 @@ const KongService = {
     return headers;
   },
 
+  info: async (connection) => {
+    const url = await sails.helpers.removeTrailingSlash(connection.kongAdminUrl);
+    const response = await axios({
+      method: 'GET',
+      headers: KongService.makeRequestHeaders(connection, true),
+      url
+    });
+
+    return response;
+  },
+
+  status: async (connection) => {
+    const url = await sails.helpers.removeTrailingSlash(connection.kongAdminUrl) + '/status';
+    const response = await axios({
+      method: 'GET',
+      headers: KongService.makeRequestHeaders(connection, true),
+      url
+    });
+
+    return response;
+  },
+
   listAll :  async (connection, endpoint) => {
 
     const cleanUrl = await sails.helpers.removeTrailingSlash(connection.kongAdminUrl);
@@ -33,7 +55,7 @@ const KongService = {
 
     // Always add size=1000 the url just to be sure
     // no more than the needed amount of requests are performed
-    const sizeParam = getParameterByName('size', url);
+    const sizeParam = await sails.helpers.getUrlParameter(url, 'size');
     if(!sizeParam)  url += url.indexOf('?') > -1 ? `&size=1000` : `?size=1000`;
 
     sails.log.debug('KongService: listAll', url);
@@ -47,18 +69,18 @@ const KongService = {
         url
       });
 
-      const data = previousData.concat(response.body.data);
+      const data = previousData.concat(response.data.data);
 
-      if (response.body.next) {
+      if (response.data.next) {
         await getData(data, await sails.helpers.removeTrailingSlash(connection.kongAdminUrl) + response.body.next);
       }else{
         try {
-          response.body.data = data;
+          response.data.data = data;
           return await ProxyHooks.afterEntityList(endpoint.replace('/', '').split('?')[0], req, response.body)
         }catch(err) {
-          return cb(null, {
+          return {
             data: []
-          })
+          }
         }
 
       }

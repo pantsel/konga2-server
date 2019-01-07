@@ -20,7 +20,7 @@ module.exports = {
 
     type: {
       type: 'string',
-      isIn: ['default', 'key_auth', 'jwt'],
+      isIn: ['no_auth', 'key_auth', 'jwt'],
       defaultsTo: 'default'
     },
 

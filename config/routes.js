@@ -49,6 +49,8 @@ module.exports.routes = {
 
   '/api/v1/permissions'     : { action: 'permissions/list' },
 
+  'POST /api/v1/connections/check'     : 'ConnectionController.check',
+
 
 
   /**
@@ -56,9 +58,14 @@ module.exports.routes = {
    */
 
   'GET /kong': 'KongProxyController.proxy',
+  'GET /kong/status': 'KongProxyController.proxy',
+
+  // Kong entities routes
   'GET /kong/:entity': 'KongProxyController.listProxy',
   'GET /kong/:entity/:id': 'KongProxyController.proxy',
   'GET /kong/:entity/:id/:child_entity': 'KongProxyController.listProxy',
+
+  // Fall back to proxy
   'POST /kong/*': 'KongProxyController.proxy',
   'PUT /kong/*': 'KongProxyController.proxy',
   'PATCH /kong/*': 'KongProxyController.proxy',

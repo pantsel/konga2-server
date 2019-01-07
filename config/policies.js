@@ -31,6 +31,7 @@ module.exports.policies = {
   ConnectionController: {
     'find': ['is-logged-in','paginate'],
     'findOne': ['is-logged-in'],
+    'check': ['is-logged-in'],
     'destroy': ['is-super-admin'],
     'update': ['is-logged-in']
   },
