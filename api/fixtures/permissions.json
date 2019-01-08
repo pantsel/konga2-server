@@ -1,5 +1,6 @@
 {
   "users": ["list", "read", "create", "update", "destroy"],
   "settings": ["update"],
+  "info": ["read"],
   "connections": ["list", "create", "update", "destroy"]
 }
