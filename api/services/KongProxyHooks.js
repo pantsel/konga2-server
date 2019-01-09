@@ -22,9 +22,6 @@ var self = module.exports = {
    */
 
   afterEntityRetrieve: async (entityName, req, data) => {
-
-    return data;
-
     if(data && data instanceof Array) { // This is a listing request. We must apply correlations recursively.
       return await self.afterEntityList(entityName, req, data);
     }

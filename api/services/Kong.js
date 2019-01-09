@@ -72,15 +72,13 @@ const KongService = {
       const data = previousData.concat(response.data.data);
 
       if (response.data.next) {
-        await getData(data, await sails.helpers.removeTrailingSlash(connection.kongAdminUrl) + response.body.next);
+        await getData(data, await sails.helpers.removeTrailingSlash(connection.kongAdminUrl) + response.data.next);
       }else{
         try {
-          response.data.data = data;
-          return await ProxyHooks.afterEntityList(endpoint.replace('/', '').split('?')[0], req, response.body)
+          return await ProxyHooks.afterEntityList(endpoint.replace('/', '').split('?')[0], connection, data)
         }catch(err) {
-          return {
-            data: []
-          }
+          console.error(err)
+          return []
         }
 
       }
