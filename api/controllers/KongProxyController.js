@@ -68,9 +68,23 @@ const self = module.exports = {
           req.connection.id,
           _.merge(req.body,{extras: kongaExtras}));
         req.body = data; // Assign the resulting data to req.body
-        return await self.send(entity, instance, kongaExtras, req, res)
+        try{
+          return await self.send(entity, instance, kongaExtras, req, res)
+        }catch (e) {
+          sails.log.error(e);
+          res.status(e.response.status);
+          return res.send(e.response.data);
+        }
+
       default:
-        return await self.send(entity, instance, kongaExtras,  req, res);
+        try{
+          return await self.send(entity, instance, kongaExtras,  req, res);
+        }catch (e) {
+          sails.log.error(e);
+          res.status(e.response.status);
+          return res.send(e.response.data);
+        }
+
     }
 
   },
@@ -111,10 +125,15 @@ const self = module.exports = {
     sails.log("KongProxyController:send:entity", entity);
     sails.log("KongProxyController:send:kongaExtras", kongaExtras);
 
+
     const response = await instance({
       method: req.method.toLowerCase(),
       data: req.body
     });
+
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.status);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.data);
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.error);
 
 
     // Apply after Hooks
