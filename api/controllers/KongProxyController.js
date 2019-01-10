@@ -131,11 +131,6 @@ const self = module.exports = {
       data: req.body
     });
 
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.status);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.data);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", response.error);
-
-
     // Apply after Hooks
     switch(req.method.toLowerCase()) {
       case "get":
