@@ -2,5 +2,6 @@
   "info": ["read"],
   "users": ["list", "read", "create", "update", "destroy"],
   "connections": ["list", "create", "update", "destroy"],
+  "services": ["list", "create", "update", "destroy"],
   "settings": ["update"]
 }
