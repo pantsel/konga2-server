@@ -105,8 +105,9 @@ const self = module.exports = {
     try {
       const resp = await Kong.listAll(req.connection, req.url);
       return res.json(resp);
-    }catch (err) {
-      return res.negotiate(err);
+    }catch (e) {
+      res.status(e.response.status);
+      return res.send(e.response.data);
     }
   },
 
@@ -138,7 +139,8 @@ const self = module.exports = {
           const data = await ProxyHooks.afterEntityRetrieve(entity, req, response.data);
           return res.json(data);
         }catch (e) {
-          return res.negotiate(e);
+          res.status(e.response.status);
+          return res.send(e.response.data);
         }
 
       case "post":
@@ -146,14 +148,16 @@ const self = module.exports = {
           const data =  await ProxyHooks.afterEntityCreate(entity, req, response.data, kongaExtras || {});
           return res.json(data);
         }catch (e) {
-          return res.negotiate(e);
+          res.status(e.response.status);
+          return res.send(e.response.data);
         }
       case "delete":
         try {
           const data =  await ProxyHooks.afterEntityDelete(entity,req);
           return res.json(data);
         }catch (e) {
-          return res.negotiate(e);
+          res.status(e.response.status);
+          return res.send(e.response.data);
         }
       default:
         return res.json(response.data)
