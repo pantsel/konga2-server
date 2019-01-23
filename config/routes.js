@@ -59,6 +59,7 @@ module.exports.routes = {
 
   'GET /kong': 'KongProxyController.proxy',
   'GET /kong/status': 'KongProxyController.proxy',
+  'GET /kong/plugins/schema/:plugin': 'KongProxyController.proxy',
 
   // Kong entities routes
   'GET /kong/:entity': 'KongProxyController.listProxy',
